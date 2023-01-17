@@ -1,0 +1,21 @@
+cc1plus: warning: include/container/maps/maps.hpp: not a directory
+cc1plus: warning: include/container/maps/maps_utils.hpp: not a directory
+cc1plus: warning: include/container/vector/vector.hpp: not a directory
+cc1plus: warning: include/container/vector/vector_utils.hpp: not a directory
+cc1plus: warning: include/container/queue/queue.hpp: not a directory
+cc1plus: warning: include/container/queue/queue_utils.hpp: not a directory
+cc1plus: warning: include/container/list/list.hpp: not a directory
+cc1plus: warning: include/container/list/list_utils.hpp: not a directory
+cc1plus: warning: include/container/stack/stack_utils.hpp: not a directory
+cc1plus: warning: include/container/stack/stack.hpp: not a directory
+cc1plus: warning: include/container/graph/graph_utils.hpp: not a directory
+cc1plus: warning: include/container/graph/graph.hpp: not a directory
+cc1plus: warning: include/container/tree/tree.hpp: not a directory
+cc1plus: warning: include/container/tree/tree_utils.hpp: not a directory
+cc1plus: warning: include/container/pool/pool.hpp: not a directory
+cc1plus: warning: include/container/pool/pool_utils.hpp: not a directory
+src/container/pool/pool.cpp:1:10: fatal error: pool.hpp: No such file or directory
+    1 | #include "pool.hpp"
+      |          ^~~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:26: check-syntax] Error 1
