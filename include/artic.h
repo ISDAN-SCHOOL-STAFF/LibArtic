@@ -5,7 +5,9 @@
 extern "C" {
 #endif
 
-void artic_function();
+#include "graphic/graphic.h"
+
+void artic_function();  // If you have additional functions
 
 #ifdef __cplusplus
 }

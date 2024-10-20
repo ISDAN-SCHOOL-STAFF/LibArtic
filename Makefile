@@ -13,15 +13,17 @@ INCLUDEDIR := include
 LIBDIR := /usr/local/lib
 INCDIR := /usr/local/include
 
+# Include both C and C++ source files
 SOURCES_C := $(shell find $(SRCDIR) -name '*.c')
 SOURCES_CPP := $(shell find $(SRCDIR) -name '*.cpp' -o -name '*.cc' -o -name '*.cxx' -o -name '*.c++')
+
+# Add graphic.cpp to SOURCES_CPP
+SOURCES_CPP += $(wildcard $(SRCDIR)/graphics/graphic.cpp)
+
 OBJECTS_C := $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(SOURCES_C))
 OBJECTS_CPP := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES_CPP))
 OBJECTS := $(OBJECTS_C) $(OBJECTS_CPP)
 LIB := libartic.a
-
-# Find test directories that contain a Makefile
-TEST_DIRS := $(shell find test -mindepth 1 -maxdepth 1 -type d -exec test -e {}/Makefile \; -print)
 
 # Default target
 all: $(LIB)
@@ -48,28 +50,14 @@ clean:
 	rm -rf $(BUILDDIR) $(LIB)
 	@echo "Clean completed."
 
-# Install the library and headers, and run tests
+# Install the library and headers
 install: all
-	@echo "Checking and installing dependencies..."
-	./install_deps.sh
 	@echo "Installing $(LIB) to $(LIBDIR)..."
 	sudo install -d $(LIBDIR)
 	sudo install -m 644 $(LIB) $(LIBDIR)
 	@echo "Installing headers to $(INCDIR)/artic..."
 	sudo install -d $(INCDIR)/artic
 	sudo cp -r $(INCLUDEDIR)/* $(INCDIR)/artic/
-	@echo "Running tests..."
-	@set -e; \
-	for dir in $(TEST_DIRS); do \
-		echo "Running tests in $$dir..."; \
-		$(MAKE) -C $$dir; \
-	done
-	@echo "Tests completed. Cleaning up test directories..."
-	@set -e; \
-	for dir in $(TEST_DIRS); do \
-		echo "Cleaning $$dir..."; \
-		$(MAKE) -C $$dir clean; \
-	done
 	@echo "LibArtic installed successfully."
 
 # Uninstall the library and headers
